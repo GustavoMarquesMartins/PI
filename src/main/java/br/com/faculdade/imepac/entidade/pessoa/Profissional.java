@@ -51,4 +51,11 @@ public class Profissional {
 
     @Enumerated
     private Profissao dadosProfissao;
+
+    public void setNome(String nome){
+        var nomeSemEspacosNoInicioENoFim = nome.strip();
+        String nomeSemQualquerCaracterEspecial = nomeSemEspacosNoInicioENoFim.replaceAll("[^a-zA-Z]", "");
+        this.nome = nomeSemQualquerCaracterEspecial;
+    }
+
 }
