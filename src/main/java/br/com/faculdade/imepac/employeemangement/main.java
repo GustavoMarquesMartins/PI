@@ -62,9 +62,13 @@ public class main {
 
         var profissional = new Profissional();
 
-        profissional.setNome("Roberto");
+        profissional.setNome("Alberto");
         profissional.setRg("1234567");
-        profissional.setCpf("123.456.789-00");
+        try {
+            profissional.setCpf("123.456.789-01110");
+        }catch (Exception e){
+            System.out.println(e);
+        }
         profissional.setNascimento(LocalDate.of(1980, 5, 10));
         profissional.setHabilitacao(true);
         profissional.setMEI("123456789");

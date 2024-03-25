@@ -1,13 +1,16 @@
 package br.com.faculdade.imepac.entidade.pessoa;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import br.com.caelum.stella.ValidationMessage;
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.faculdade.imepac.infraestrutura.DocumentValidator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "profissionais")
 @Data
@@ -53,9 +56,14 @@ public class Profissional {
     private Profissao dadosProfissao;
 
     public void setNome(String nome){
+        //Remove qualquer espacamento no inicio e fim de uma string ou caracter especial
         var nomeSemEspacosNoInicioENoFim = nome.strip();
         String nomeSemQualquerCaracterEspecial = nomeSemEspacosNoInicioENoFim.replaceAll("[^a-zA-Z]", "");
         this.nome = nomeSemQualquerCaracterEspecial;
     }
 
+    public void setCpf(String cpf) {
+        // Atribui um cpf para a instancia
+        this.cpf = DocumentValidator.mascaraCpf(cpf);
+    }
 }
